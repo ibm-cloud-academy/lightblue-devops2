@@ -30,7 +30,7 @@ services:
           DEV_SPACE_NAME: '{{form.pipeline.parameters.dev-space}}'
           DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
           WEB_REPO: git-lightblue-web
-        execute: false
+        execute: true
   git-lightblue-web:
     service_id: githubpublic
     parameters:
@@ -56,7 +56,7 @@ services:
           DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
           CUSTOMER_REPO: git-lightblue-customer
           CUSTOMER_PORT: '8080'
-        execute: false
+        execute: true
   git-lightblue-customer:
     service_id: githubpublic
     parameters:
@@ -85,7 +85,7 @@ services:
           MYSQL_JDBC_URL_US: 'jdbc:mysql://{{form.pipeline.parameters.mysql-servers-us}}/{{form.parameters.inventory-db}}'
           MYSQL_USER: '{{form.pipeline.parameters.inventory-dbuser}}'
           MYSQL_PASSWORD: '{{form.pipeline.parameters.inventory-dbpass}}'
-        execute: false
+        execute: true
   git-lightblue-catalog:
     service_id: githubpublic
     parameters:
