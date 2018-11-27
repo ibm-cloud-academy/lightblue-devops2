@@ -1,5 +1,12 @@
 version: '2'
 template:
+  required:
+    - pipeline-lightblue-web
+    - pipeline-lightblue-customer
+    - pipeline-lightblue-catalog
+    - git-lightblue-web
+    - git-lightblue-customer
+    - git-lightblue-catalog
   info:
     git url: >-
       [https://github.com/ibm-cloud-academy/lightblue-devops2](https://github.com/ibm-cloud-academy/lightblue-devops2)
