@@ -82,7 +82,7 @@ services:
           DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
           CATALOG_REPO: git-lightblue-catalog
           CATALOG_PORT: '9080,8080'
-          MYSQL_JDBC_URL_US: "jdbc:mysql://{{form.pipeline.parameters.mysql-servers-us}}/{{form.parameters.inventory-db}}'
+          MYSQL_JDBC_URL_US: 'jdbc:mysql://{{form.pipeline.parameters.mysql-servers-us}}/{{form.parameters.inventory-db}}'
           MYSQL_USER: '{{form.pipeline.parameters.inventory-dbuser}}'
           MYSQL_PASSWORD: '{{form.pipeline.parameters.inventory-dbpass}}'
         execute: false
