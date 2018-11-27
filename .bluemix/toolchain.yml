@@ -29,7 +29,7 @@ services:
           CF_APP_NAME: '{{form.pipeline.parameters.web-app-name}}'
           DEV_SPACE_NAME: '{{form.pipeline.parameters.dev-space}}'
           DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
-          WEB_REPO: `git-lightblue-web`
+          WEB_REPO: 'git-lightblue-web'
         execute: false
   git-lightblue-web:
     service_id: githubpublic
