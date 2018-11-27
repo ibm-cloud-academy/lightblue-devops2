@@ -29,7 +29,7 @@ services:
           CF_APP_NAME: '{{form.pipeline.parameters.web-app-name}}'
           DEV_SPACE_NAME: '{{form.pipeline.parameters.dev-space}}'
           DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
-          WEB_REPO: 'git-lightblue-web'
+          WEB_REPO: git-lightblue-web
         execute: false
   git-lightblue-web:
     service_id: githubpublic
@@ -54,7 +54,7 @@ services:
           CF_APP_NAME: '{{form.pipeline.parameters.customer-app-name}}'
           DEV_SPACE_NAME: '{{form.pipeline.parameters.dev-space}}'
           DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
-          CUSTOMER_REPO: 'git-lightblue-customer'
+          CUSTOMER_REPO: git-lightblue-customer
           CUSTOMER_PORT: '8080'
         execute: false
   git-lightblue-customer:
@@ -80,7 +80,7 @@ services:
           CF_APP_NAME: '{{form.pipeline.parameters.catalog-app-name}}'
           DEV_SPACE_NAME: '{{form.pipeline.parameters.dev-space}}'
           DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
-          CATALOG_REPO: 'git-lightblue-catalog'
+          CATALOG_REPO: git-lightblue-catalog
           CATALOG_PORT: '9080,8080'
           MYSQL_JDBC_URL_US: 'jdbc:mysql://{{form.pipeline.parameters.mysql-servers-us}}/{{form.parameters.inventory-db}}'
           MYSQL_USER: '{{form.pipeline.parameters.inventory-dbuser}}'
