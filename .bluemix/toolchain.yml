@@ -1,15 +1,16 @@
 version: '2'
-required:
-  - pipeline-lightblue-web
-  - pipeline-lightblue-customer
-  - pipeline-lightblue-catalog
-  - git-lightblue-web
-  - git-lightblue-customer
-  - git-lightblue-catalog
-info:
-  git url: >-
-    [https://github.com/ibm-cloud-academy/lightblue-devops2](https://github.com/ibm-cloud-academy/lightblue-devops2)
-  git branch: '[master](https://github.com/ibm-cloud-academy/lightblue-devops2/tree/master)'
+template:
+  required:
+    - pipeline-lightblue-web
+    - pipeline-lightblue-customer
+    - pipeline-lightblue-catalog
+    - git-lightblue-web
+    - git-lightblue-customer
+    - git-lightblue-catalog
+  info:
+    git url: >-
+      [https://github.com/ibm-cloud-academy/lightblue-devops2](https://github.com/ibm-cloud-academy/lightblue-devops2)
+    git branch: '[master](https://github.com/ibm-cloud-academy/lightblue-devops2/tree/master)'
 toolchain:
   name: 'lightblue-devops-{{timestamp}}'
 services:
@@ -98,16 +99,16 @@ services:
 form:
   pipeline:
     parameters:
-      suffix: ''
-      dev-region: 'us-south'
-      dev-space: 'dev'
-      dev-organization: ''
-      web-app-name: 'lightblue-web-{{suffix}}'
-      customer-app-name: 'lightblue-customer-{{suffix}}'
-      catalog-app-name: 'lightblue-catalog-{{suffix}}'
-      mysql-servers-us: '9.1.2.3:5674'
-      inventory-db: 'inventorydb'
-      inventory-dbuser: 'dbuser'
-      inventory-dbpass: 'Pass4dbus3r'
+      suffix: ""
+      dev-region: "us-south"
+      dev-space: "dev"
+      dev-organization: ""
+      web-app-name: "lightblue-web-{{suffix}}"
+      customer-app-name: "lightblue-customer-{{suffix}}"
+      catalog-app-name: "lightblue-catalog-{{suffix}}"
+      mysql-servers-us: "9.1.2.3:5674"
+      inventory-db: "inventorydb"
+      inventory-dbuser: "dbuser"
+      inventory-dbpass: "Pass4dbus3r"
     schema:
       $ref: deploy.json
