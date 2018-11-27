@@ -99,10 +99,10 @@ services:
 form:
   pipeline:
     parameters:
-      suffix: ""
+      suffix: " "
       dev-region: "us-south"
       dev-space: "dev"
-      dev-organization: ""
+      dev-organization: " "
       web-app-name: "lightblue-web-{{suffix}}"
       customer-app-name: "lightblue-customer-{{suffix}}"
       catalog-app-name: "lightblue-catalog-{{suffix}}"
