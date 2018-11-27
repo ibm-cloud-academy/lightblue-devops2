@@ -1,0 +1,135 @@
+version: '2'
+# messages:
+#   $i18n: locales.yml
+# template:
+#   name:
+#     $ref: "#/messages/template.name"
+#   description:
+#     $ref: "#/messages/template.description"
+#   header: '![](toolchain.svg?localize)'
+#   icon: icon.svg
+  required:
+    - pipeline-lightblue-web
+    - pipeline-lightblue-customer
+    - pipeline-lightblue-catalog
+    - git-lightblue-web
+    - git-lightblue-customer
+    - git-lightblue-catalog
+  info:
+    git url: >-
+      [https://github.com/ibm-cloud-academy/lightblue-devops2](https://github.com/ibm-cloud-academy/lightblue-devops2)
+    git branch: '[master](https://github.com/ibm-cloud-academy/lightblue-devops2/tree/master)'
+toolchain:
+  name: 'lightblue-devops-{{timestamp}}'
+#  template:
+#    getting_started:
+#      $ref: "#/messages/template.gettingStarted"
+services:
+  pipeline-lightblue-web:
+    service_id: pipeline
+    parameters:
+      services:
+        - git-lightblue-web
+      name: 'lightblue-web'
+      configuration:
+        content:
+          $text: lightblue-web.pipeline.yml
+        env:
+          SUFFIX: '{{form.pipeline.parameters.suffix}}'
+          DEV_REGION_ID: '{{form.pipeline.parameters.dev-region}}'
+          CF_APP_NAME: '{{form.pipeline.parameters.web-app-name}}'
+          DEV_SPACE_NAME: '{{form.pipeline.parameters.dev-space}}'
+          DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
+          WEB_REPO: git-lightblue-web
+        execute: false
+  git-lightblue-web:
+    service_id: githubpublic
+    parameters:
+      repo_name: 'lightblue-web-{{timestamp}}'
+      repo_url: 'https://github.com/ibm-cloud-academy/lightblue-web'
+      type: clone
+      has_issues: true
+      enable_traceability: true
+  pipeline-lightblue-customer:
+    service_id: pipeline
+    parameters:
+      services:
+        - git-lightblue-customer
+      name: 'lightblue-customer'
+      configuration:
+        content:
+          $text: lightblue-customer.pipeline.yml
+        env:
+          SUFFIX: '{{form.pipeline.parameters.suffix}}'
+          DEV_REGION_ID: '{{form.pipeline.parameters.dev-region}}'
+          CF_APP_NAME: '{{form.pipeline.parameters.customer-app-name}}'
+          DEV_SPACE_NAME: '{{form.pipeline.parameters.dev-space}}'
+          DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
+          CUSTOMER_REPO: git-lightblue-customer
+          CUSTOMER_PORT: '8080'
+        execute: false
+  git-lightblue-customer:
+    service_id: githubpublic
+    parameters:
+      repo_name: 'lightblue-customer-{{timestamp}}'
+      repo_url: 'https://github.com/ibm-cloud-academy/lightblue-customer'
+      type: clone
+      has_issues: true
+      enable_traceability: true
+  pipeline-lightblue-catalog:
+    service_id: pipeline
+    parameters:
+      services:
+        - git-lightblue-catalog
+      name: 'lightblue-catalog'
+      configuration:
+        content:
+          $text: lightblue-catalog.pipeline.yml
+        env:
+          SUFFIX: '{{form.pipeline.parameters.suffix}}'
+          DEV_REGION_ID: '{{form.pipeline.parameters.dev-region}}'
+          CF_APP_NAME: '{{form.pipeline.parameters.catalog-app-name}}'
+          DEV_SPACE_NAME: '{{form.pipeline.parameters.dev-space}}'
+          DEV_ORG_NAME: '{{form.pipeline.parameters.dev-organization}}'
+          CATALOG_REPO: git-lightblue-catalog
+          CATALOG_PORT: '9080,8080'
+          MYSQL_JDBC_URL_US: "jdbc:mysql://{{form.pipeline.parameters.mysql-servers-us}}/{{form.parameters.inventory-db}}'
+          MYSQL_USER: '{{form.pipeline.parameters.inventory-dbuser}}'
+          MYSQL_PASSWORD: '{{form.pipeline.parameters.inventory-dbpass}}'
+        execute: false
+  git-lightblue-catalog:
+    service_id: githubpublic
+    parameters:
+      repo_name: 'lightblue-catalog-{{timestamp}}'
+      repo_url: 'https://github.com/ibm-cloud-academy/lightblue-catalog'
+      type: clone
+      has_issues: true
+      enable_traceability: true
+  webide:
+    service_id: orion
+form:
+  pipeline:
+    parameters:
+      suffix: ''
+      dev-region: 'us-south'
+      dev-space: 'dev'
+      dev-organization: ''
+      web-app-name: 'lightblue-web-{{suffix}}'
+      customer-app-name: 'lightblue-customer-{{suffix}}'
+      catalog-app-name: 'lightblue-catalog-{{suffix}}'
+      mysql-servers-us: '9.1.2.3:5674'
+      inventory-db: 'inventorydb'
+      inventory-dbuser: 'dbuser'
+      inventory-dbpass: 'Pass4dbus3r'
+    schema:
+      $ref: deploy.json
+#  githubpublic:
+#    parameters:
+#      catalog-api-repo_name: 'catalog-api-{{toolchain.name}}'
+#      catalog-api-repo_url: 'https://github.com/open-toolchain/Microservices_CatalogAPI'
+#      orders-api-repo_name: 'orders-api-{{toolchain.name}}'
+#      orders-api-repo_url: 'https://github.com/open-toolchain/Microservices_OrdersAPI'
+#      ui-repo_name: 'ui-{{toolchain.name}}'
+#      ui-repo_url: 'https://github.com/open-toolchain/Microservices_UI'
+#    schema:
+#      $ref: github.json

@@ -1,0 +1,54 @@
+---
+stages:
+- name: BUILD
+  inputs:
+  - type: git
+    branch: initial-cf
+    service: ${CUSTOMER_REPO}
+  triggers:
+  - type: commit
+# properties:
+# - name: LOGICAL_APP_NAME
+#   value: ${LOGICAL_APP_NAME}
+#   type: text
+# - name: BUILD_PREFIX
+#   value: master
+#   type: text
+  jobs:
+  - name: Build
+    type: builder
+    artifact_dir: ''
+    build_type: gradle
+    script: |-
+      #!/bin/bash
+      # The default Gradle version is {0}
+      # To use Gradle {0}, uncomment the following line:
+      #export PATH="$GRADLE2_HOME/bin:$PATH"
+      export JAVA_HOME=$JAVA8_HOME
+      gradle build -x test
+- name: DEPLOY
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  triggers:
+  - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      suffix: ${SUFFIX}
+      region_id: ${DEV_REGION_ID}
+      organization: ${DEV_ORG_NAME}
+      space: ${DEV_SPACE_NAME}
+      application: ${CF_APP_NAME}
+      port: ${CUSTOMER_PORT}
+    script: |-
+      #!/bin/bash
+      echo "Deploying $CF_APP_NAME using $SUFFIX
+      cf push ${CF_APP_NAME} -m 256M
+hooks:
+- enabled: true
+  label: null
+  ssl_enabled: false
+  url: https://devops-api.ng.bluemix.net/v1/messaging/webhook/publish

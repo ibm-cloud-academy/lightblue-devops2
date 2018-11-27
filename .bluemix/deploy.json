@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": {
+        "Light Blue Compute Toolchain Deployment to IBM Cloud"
+    },
+    "description": {
+        "lightbluecompute toolchain"
+    },
+    "longDescription": {
+        "Information entered here will be used at deployment time."
+    },
+    "type": "object",
+    "properties": {
+        "suffix": {
+            "description": "Deployment Suffix",
+            "type": "string"
+        },
+        "dev-region": {
+            "description": "Deploy to thie IBM Cloud Region",
+            "type": "string"
+        },
+        "dev-organization": {
+            "description": "Deploy to thie IBM Cloud Organization",
+            "type": "string"
+        },
+        "dev-space": {
+            "description": "Deploy to thie IBM Cloud Space",
+            "type": "string"
+        },
+    },
+    "required": [
+        "suffix",
+        "dev-region",
+        "dev-organization",
+        "dev-space"
+    ],
+    "form": [
+        {
+            "type": "validator",
+            "url": "/devops/setup/bm-helper/helper.html"
+        },
+        {
+            "type": "text",
+            "readonly": false,
+            "title": {
+                "Suffix"
+            },
+            "key": "suffix"
+        },
+        {
+            "type": "table",
+            "columnCount": 4,
+            "widths": ["30%", "35%", "35%"],
+            "items": [
+                {
+                    "type": "label",
+                    "title": ""
+                },
+                {
+                    "type": "label",
+                    "title": "Region"
+                },
+                {
+                    "type": "label",
+                    "title": "Organization"
+                },
+                {
+                    "type": "label",
+                    "title": "Space"
+                },
+                {
+                    "type": "label",
+                    "title": "Deploy to"
+                },
+                {
+                    "type": "select",
+                    "key": "dev-region"
+                },
+                {
+                    "type": "select",
+                    "key": "dev-organization"
+                },
+                {
+                    "type": "select",
+                    "key": "dev-space",
+                    "readonly": false
+                }
+            ]
+        }
+    ]
+}
+
